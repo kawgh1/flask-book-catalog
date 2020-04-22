@@ -18,11 +18,10 @@ with flask_app.app_context():
 
     # this code says, if user_name 'harry' does not exist in our database
     # create that user
-    try:
-        if not User.query.filter_by(user_name='harry').first():
-            User.create_user(user='harry', email='harry@potters.com', password='secret')
-    except exc.IntegrityError:
-        flask_app.run()
+
+    if not User.query.filter_by(user_name='harry').first():
+        User.create_user(user='harry', email='harry@potters.com', password='secret')
+
 
 
 # In order to upload to Heroku we need to install 'gunicorn' which is a Python HTTP server
