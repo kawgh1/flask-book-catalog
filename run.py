@@ -21,7 +21,7 @@ with flask_app.app_context():
     try:
         if not User.query.filter_by(user_name='harry').first():
             User.create_user(user='harry', email='harry@potters.com', password='secret')
-    except exc.OperationalError:
+    except exc.IntegrityError:
         flask_app.run()
 
 
