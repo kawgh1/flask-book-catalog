@@ -53,7 +53,7 @@ def create_app(config_type): # dev, test, prod
     # config_type is the name of our package file (dev, test, prod)
 
     # so we are joining the current working directory with the package folder/file we want
-    configuration = os.path.join(os.getcwd(), 'bookFlask/config', config_type + '.py')
+    configuration = os.path.join(os.getcwd(), 'config', config_type + '.py')
 
     # the above outputs --> C:\Users\JJ\PycharmProjects\book_catalog\dev.py
 
