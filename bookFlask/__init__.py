@@ -8,7 +8,7 @@ from flask_bootstrap import Bootstrap
 
 # LoginManager is a class which has all the options we need to manage user logins and sessions
 from flask_login import LoginManager
-# More glask loginmanager info
+# More flask loginmanager info
 # https://flask-login.readthedocs.io/en/latest
 
 # Bcrypt is used for password hashing
