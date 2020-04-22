@@ -1,0 +1,67 @@
+
+<!-- this import all the styles and python from layout.html -->
+{% extends 'layout.html' %}
+
+<!-- everything commented out is not needed and imported from 'layout.html' above --
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Magic Books Inc</title>
+</head>
+<body>
+
+-->
+
+    {% block content %}
+
+
+        <!-- We are going to display our books using a bootstrap grid
+                using a 3 column grid so that each row holds 3 books -->
+
+        <!-- A bootstrap grid contains 12 columns
+                class='col-md-4' will merge 12 columns into 3 columns and each column will span the length
+                of 4 columns on the page, meaning it's a 3 column by 4 row grid. -->
+        <div class="container books">
+            <div class="row">
+
+
+                {% for book in books %}
+
+                    <div class="col-md-4">
+
+                            <!-- Can also use the url_for() method below after img/.... in the src. instead of hardcoding it. -->
+                            <img src="static/img/{{ book.image }}" alt="book-img" height="200" width="180" class="img-rounded">
+
+                            <h4>Title: {{ book.title }}</h4>
+                            <p>Author: {{book.author }}</p>
+                            <p>Format: {{book.format }}</p>
+                            <p>Rating: {{book.rating }}</p>
+                            <p>Pages: {{book.num_pages }}</p>
+                        <!-- When the user clicks on this link, it is same as if he typed the url '/display/publisher/pub_id=7' into the browser
+                        # this calls the display_publisher() method in the routes.py file, which in turn calls the publisher.html file to render -->
+                            <p><a href="{{ url_for('main.display_publisher', publisher_id=book.pub_id) }}">Publisher ID: {{ book.pub_id }}</a></p>
+                            <!-- this is the CREATE button, label-primary = green
+                                    notice on this one the publisher_id is needed  (not book id) and pulled through to the create book page-->
+                            <span class="label label-success"><a href="{{ url_for('main.create_book', pub_id=book.pub_id) }}" style="color: floralwhite"> create </a> </span>
+                            <!-- this is the UPDATE button, label-primary = lightblue
+                                            notice on these two the BOOK ID is needed  (not publisher id) and pulled through to the edit/delete book page-->
+                            <span class="label label-primary"><a href="{{ url_for('main.edit_book', book_id=book.id) }}" style="color: floralwhite"> edit </a> </span>
+                            <!-- this is the DELETE button, label-info = blue -->
+                            <span class="label label-info"><a href="{{ url_for('main.delete_book', book_id=book.id) }}" style="color: floralwhite"> delete </a> </span>
+                        <br><br>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% endblock %}
+
+<!--
+</body>
+
+</html>
+-->

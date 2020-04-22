@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="container form">
+    <h4 class="form"> Register Here </h4>
+
+        <hr><br>
+
+        <!-- This is the old way --
+
+        <form action="/register" method="post">
+
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+
+                {{ form.name.label }}
+                {{ form.name }}
+
+            </div>
+
+            <div class="form-group">
+
+                {{ form.email.label }}
+                {{ form.email }}
+
+            </div>
+
+            <div class="form-group">
+                -- styling the submit button with css class btn btn-primary --
+                {{ form.submit(class='btn btn-primary') }}
+
+
+            </div>
+
+
+        </form>
+        <br>
+
+        -- this block means, if there are values for name and email, display this code
+                if there are no values, ie. they are still 'None' then this block is skipped --
+        {% if (name) and (email) %}
+        <p>Hello {{ name }}!</p>
+        <p> Your email with us is {{ email }}!</p>
+        {% endif %}
+
+        -- this prints
+
+            ImmutableMultiDict([('csrf_token',
+                                'ImU1YTliNzkyNmI0MmYzNjFmNjY1Zjk1YWI5MWZhNGU1MGQyNTk1NjUi.Xp27xw.QFKxvg5jml-BEsu9PShfysKIHp8'),
+                                ('name', 'catman'), ('email', 'bigmama@bigmama.com'), ('submit', 'Register!')])
+
+             which is a hidden request form that shows the CSRF token.
+             This form data should never be displayed publicly, especially sensitive fields like password, SSN, DOB, etc.
+             The CSRF token encrypts the login info sent by the user and this
+             makes CSRF - Cross-Site Scripting Forgery attack impossible, because all they see
+             is the token rather than the information.
+
+
+        {{ request.form }}
+
+    -->
+
+
+        {{ form.hidden_tag() }}
+        <!-- this line brings the form data from our routes request register_user() method
+                thus, all the data - name, username, email, password, are pulled through to here -->
+        {{ wtf.quick_form(form) }}
+
+
+
+
+    </div>
+
+
+
+
+
+{% endblock %}
