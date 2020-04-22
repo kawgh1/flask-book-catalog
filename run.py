@@ -10,21 +10,21 @@ from sqlalchemy import exc
 # The next line was removed because it may not be relevant when we upload to webserver
 # if __name__ == '__main__':
 
-    # 'flask_app' below is used in the Procfile
-    flask_app = create_app('prod')
-    # spin up the database and tables/models from the current app above
-    with flask_app.app_context():
-        db.create_all()
+# 'flask_app' below is used in the Procfile
+flask_app = create_app('prod')
+# spin up the database and tables/models from the current app above
+with flask_app.app_context():
+    db.create_all()
 
-        # this code says, if user_name 'harry' does not exist in our database
-        # create that user
-        try:
-            if not User.query.filter_by(user_name='harry').first():
-                User.create_user(user='harry',
-                             email='harry@potters.com',
-                             password='secret')
-        except exc.IntegrityError:
-            flask_app.run()
+    # this code says, if user_name 'harry' does not exist in our database
+    # create that user
+    try:
+        if not User.query.filter_by(user_name='harry').first():
+            User.create_user(user='harry',
+                         email='harry@potters.com',
+                         password='secret')
+    except exc.IntegrityError:
+        flask_app.run()
 
 
 # In order to upload to Heroku we need to install 'gunicorn' which is a Python HTTP server
