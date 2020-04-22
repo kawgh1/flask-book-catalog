@@ -26,7 +26,7 @@ from flask_bcrypt import Bcrypt
 # For this project we're going to use the Flask version of bootstrap
 # because it's more integrated with the Flask framework
 # pip3 install flask-bootstrap
-
+from flask_heroku import Heroku
 
 db = SQLAlchemy()
 
@@ -42,7 +42,7 @@ login_manager.login_view = 'authentication.do_the_login'
 login_manager.session_protection = 'strong'
 # create an instance of Bcrypt
 bcrypt = Bcrypt()
-
+heroku = Heroku()
 
 def create_app(config_type): # dev, test, prod
 
@@ -71,6 +71,10 @@ def create_app(config_type): # dev, test, prod
     login_manager.init_app(app) # initialize login manager
 
     bcrypt.init_app(app) # initialize bcrypt
+
+    heroku.init_app(app) # initialize heroku
+
+
 
     # from bookFlask.catalog import main
     from bookFlask.catalog import main # import blueprint
