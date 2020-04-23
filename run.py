@@ -4,6 +4,14 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
 from flask import Flask
 
+flask_app = create_app('prod')
+with flask_app.app_context():
+    db.create_all()
+    try:
+        if not User.query.filter_by(user_name='harry').first():
+            User.create_user(user='harry', email='harry@potters.com', password='secret')
+    except exc.IntegrityError:
+        flask_app.run()
 
 
 # This is where we run the app. It is outside of the bookFlask folder
@@ -14,25 +22,25 @@ from flask import Flask
 # if __name__ == '__main__':
 
 #'flask_app' below is used in the Procfile
-flask_app = create_app('prod')
-# spin up the database and tables/models from the current app above
-with flask_app.app_context():
-
-    db.create_all()
-
-    # this code says, if user_name 'harry' does not exist in our database
-    # create that user
-    # try:
-    #     if not User.query.filter_by(user_name='harry').first():
-    #         User.create_user(user='harry', email='harry@potters.com', password='secret')
-    # except exc.IntegrityError:
-    #     flask_app.run()
-
-
-    if not User.query.filter_by(user_name='harry').first():
-        User.create_user(user='harry', email='harry@potters.com', password='secret')
-
-flask_app.run()
+# flask_app = create_app('prod')
+# # spin up the database and tables/models from the current app above
+# with flask_app.app_context():
+#
+#     db.create_all()
+#
+#     # this code says, if user_name 'harry' does not exist in our database
+#     # create that user
+#     # try:
+#     #     if not User.query.filter_by(user_name='harry').first():
+#     #         User.create_user(user='harry', email='harry@potters.com', password='secret')
+#     # except exc.IntegrityError:
+#     #     flask_app.run()
+#
+#
+#     if not User.query.filter_by(user_name='harry').first():
+#         User.create_user(user='harry', email='harry@potters.com', password='secret')
+#
+# flask_app.run()
 
 
     # In order to upload to Heroku we need to install 'gunicorn' which is a Python HTTP server
