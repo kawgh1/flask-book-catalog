@@ -3,8 +3,8 @@ from bookFlask.auth.models import User
 
 # app = create_app()
 
-flask_app = create_app('prod')
-# spin up the database and tables/models from the current app above
+app = create_app()
+# # spin up the database and tables/models from the current app above
 # with flask_app.app_context():
 #
 #     db.create_all()
@@ -19,5 +19,8 @@ flask_app = create_app('prod')
 #
 #     if not User.query.filter_by(user_name='harry').first():
 #         User.create_user(user='harry', email='harry@potters.com', password='secret')
-#
-# flask_app.run()
+# #
+# # flask_app.run()
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
