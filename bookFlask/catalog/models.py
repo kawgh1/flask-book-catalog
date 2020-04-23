@@ -5,8 +5,10 @@ from datetime import datetime
 
 # Tables are creating by making a new class of type db.Model
 
+
 # A db.Model object is a new Table
 class Publication(db.Model):
+
     __tablename__ = 'publication'
 
     # One of the benefits of SQLAlchemy is we can create tables here in Python, rather than writing SQL in the database platform

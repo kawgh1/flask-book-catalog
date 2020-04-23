@@ -44,6 +44,7 @@ login_manager.session_protection = 'strong'
 bcrypt = Bcrypt()
 heroku = Heroku()
 
+
 def create_app(config_type): # dev, test, prod
 
     app = Flask(__name__)
