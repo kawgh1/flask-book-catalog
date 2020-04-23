@@ -3,7 +3,7 @@ from bookFlask.auth.models import User
 
 # app = create_app()
 
-flask_app = create_app('dev')
+flask_app = create_app('prod')
 # spin up the database and tables/models from the current app above
 with flask_app.app_context():
 

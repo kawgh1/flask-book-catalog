@@ -14,7 +14,7 @@ from flask import Flask
 # if __name__ == '__main__':
 
 #'flask_app' below is used in the Procfile
-flask_app = create_app('dev')
+flask_app = create_app('prod')
 # spin up the database and tables/models from the current app above
 with flask_app.app_context():
 
